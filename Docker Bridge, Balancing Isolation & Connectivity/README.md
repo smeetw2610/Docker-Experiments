@@ -43,11 +43,11 @@ docker network create --driver bridge --subnet 172.20.0.0/16 --ip-range 172.20.2
 ---
 
 ## 🚀 2. Running Containers in the Custom Network
-### Running **Redis Container** (`tarak-database`)
+### Running **Redis Container** (`smeet-database`)
 ```bash
 docker run -itd --net=smeet-bridge --name=smeet-database redis
 ```
-### Running **BusyBox Container** (`tarak-server-A`)
+### Running **BusyBox Container** (`smeet-server-A`)
 ```bash
 docker run -itd --net=smeet-bridge --name=smeet-server-A busybox
 ```

@@ -33,7 +33,7 @@ To demonstrate, we create a **custom bridge network** called `tarak-bridge` and 
 
 ## 🔧 1. Creating a Custom Bridge Network
 ```bash
-docker network create --driver bridge --subnet 172.20.0.0/16 --ip-range 172.20.240.0/20 tarak-bridge
+docker network create --driver bridge --subnet 172.20.0.0/16 --ip-range 172.20.240.0/20 smeet-bridge
 ```
 ### 🔍 Explanation:
 - `--driver bridge` → Uses the default **bridge network mode**.

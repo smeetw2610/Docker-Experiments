@@ -45,55 +45,55 @@ docker network create --driver bridge --subnet 172.20.0.0/16 --ip-range 172.20.2
 ## 🚀 2. Running Containers in the Custom Network
 ### Running **Redis Container** (`tarak-database`)
 ```bash
-docker run -itd --net=tarak-bridge --name=tarak-database redis
+docker run -itd --net=smeet-bridge --name=smeet-database redis
 ```
 ### Running **BusyBox Container** (`tarak-server-A`)
 ```bash
-docker run -itd --net=tara-bridge --name=tarak-server-A busybox
+docker run -itd --net=smeet-bridge --name=smeet-server-A busybox
 ```
 
 ### 📌 Check Container IPs
 ```bash
-docker network inspect tarak-bridge
+docker network inspect smeet-bridge
 ```
 Expected Output:
 ```
- tarak-database: 172.20.240.1
- tarak-server-A: 172.20.240.2
+ smeet-database: 172.20.240.1
+ smeet-server-A: 172.20.240.2
 ```
 
 ---
 
 ## 🔄 3. Testing Communication Between Containers
-### Ping from **tarak-database** to **tarak-server-A**
+### Ping from **smeet-database** to **smeet-server-A**
 ```bash
-docker exec -it tarak-database ping 172.20.240.2
+docker exec -it smeet-database ping 172.20.240.2
 ```
-### Ping from **tarak-server-A** to **tarak-database**
+### Ping from **smeet-server-A** to **smeet-database**
 ```bash
-docker exec -it tarak-server-A ping 172.20.240.1
+docker exec -it smeet-server-A ping 172.20.240.1
 ```
 ✅ Expected Outcome: Both containers should successfully **ping** each other.
 
 ---
 
 ## 🚧 4. Demonstrating Network Isolation with a Third Container
-We add another container (`tarak-server-B`) on the **default bridge network**.
+We add another container (`smeet-server-B`) on the **default bridge network**.
 ```bash
-docker run -itd --name=tarak-server-B busybox
+docker run -itd --name=smeet-server-B busybox
 ```
-### 📌 Get IP of `tarak-server-B`
+### 📌 Get IP of `smeet-server-B`
 ```bash
-docker inspect -format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' tarak-server-B
+docker inspect -format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' smeet-server-B
 ```
 (Example IP: `172.17.0.2`)
 
 ---
 
 ## ❌ 5. Testing Communication Between Different Networks
-Ping from `tarak-database` to `tarak-server-B`:
+Ping from `smeet-database` to `smeet-server-B`:
 ```bash
-docker exec -it tarak-database ping 172.17.0.2
+docker exec -it smeet-database ping 172.17.0.2
 ```
 🚨 **Expected Outcome:** The ping should **fail**, as they are on different networks.
 
@@ -102,11 +102,11 @@ docker exec -it tarak-database ping 172.17.0.2
 ## 🔍 6. Confirming Network Isolation
 ### Inspect Networks
 ```bash
-docker network inspect tarak-bridge
+docker network inspect smeet-bridge
 docker network inspect bridge
 ```
-✅ `tarak-bridge` should contain `tarak-database` & `tarak-server-A`.
-✅ `bridge` should contain `tarak-server-B`.
+✅ `smeet-bridge` should contain `smeet-database` & `smeet-server-A`.
+✅ `bridge` should contain `smeet-server-B`.
 
 ---
 
